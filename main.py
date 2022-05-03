@@ -16,7 +16,8 @@ if command == '1' :
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     # options.add_argument("--headless")
-    driver = webdriver.Chrome('chromedriver.exe', options=options)
+    # driver = webdriver.Chrome('chromedriver.exe', options=options)
+    driver = webdriver.Chrome('./chromedriver', options=options)
     id_pw_list = pd.read_excel("./account.xlsx")
         # Category  brand	Condition	Material	Color	country 	size	Style	정상가	할인가
     df = pd.DataFrame(columns=["ebay item number", "stock", "image", "URL","name", "Category","	Brand","Condition","Material","Color","size", "gender","bag height", "bag length","Style","Country","배송기간","배송비","정상가","할인가"])
@@ -248,7 +249,8 @@ elif command == '2' :
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     # options.add_argument("--headless")
 
-    driver = webdriver.Chrome('chromedriver.exe', options=options)
+    # driver = webdriver.Chrome('chromedriver.exe', options=options)
+    driver = webdriver.Chrome('./chromedriver', options=options)
     
 
     for name, row in  df_img.iterrows() :
@@ -295,7 +297,8 @@ elif command == "3" :
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     # options.add_argument("--headless")
-    driver = webdriver.Chrome('chromedriver.exe', options=options)
+    # driver = webdriver.Chrome('chromedriver.exe', options=options)
+    driver = webdriver.Chrome('./chromedriver', options=options)
 
     df_stock_output = pd.DataFrame(columns=["url","ebay item number", "재고 유무"])
 
@@ -315,7 +318,7 @@ elif command == "3" :
         except : 
             message = ""
 
-        if "end" in message : 
+        if "end" in message or "품절" in message: 
             page.append(["",row[0],row[0].replace("https://www.ebay.com/itm/",""),"X"])
         else : 
             page.append(["",row[0],row[0].replace("https://www.ebay.com/itm/",""),"O"])
